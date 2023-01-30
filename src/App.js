@@ -3,8 +3,13 @@ import "./App.css";
 
 import countries from "i18n-iso-countries";
 import apiKey from "./s";
+import axios from "axios";
 
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+let hitServer = async () => {
+  let res = await axios.post("http://localhost:3001/api/postAThing", "stringdatafromclient", {headers: {"Content-type": "text/plain"}})
+  console.log(res)
+}
 
 function App() {
   // State
@@ -65,11 +70,11 @@ function App() {
         <div className="card mt-3 mx-auto" style={{ width: "60vw" }}>
           {apiValue.main ? (
             <div className="card-body text-center">
-              {/* <img
-                src={`http://openweathermap.org/img/w/${apiData.weather[0].icon}.png`}
+              <img
+                src={`http://openweathermap.org/img/w/${apiValue.weather[0].icon}.png`}
                 alt="weather status icon"
                 className="weather-icon"
-              /> */}
+              />
 
               <p className="h2">{kelvToFarenheit(apiValue.main.temp)}&deg; F</p>
 
@@ -112,6 +117,10 @@ function App() {
           )}
         </div>
       </div>
+      <br/>
+      <button onClick={hitServer}>
+          Post to Server
+        </button>
       <footer className="footer">TODO</footer>
     </div>
   );

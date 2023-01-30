@@ -21,3 +21,11 @@ The 'start' script will run react-scripts start
 ```bash
 npm start
 ```
+## Start Express App
+The 'start' script will run react-scripts start 
+
+```bash
+cd express-app
+npm install
+npm start
+```
