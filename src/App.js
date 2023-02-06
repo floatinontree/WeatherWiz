@@ -11,11 +11,31 @@ let hitServer = async () => {
   console.log(res)
 }
 
+
+
 function App() {
   // State
   const [apiValue, setApiValue] = useState({});
   const [getState, setGetState] = useState("Dallas");
   const [state, setState] = useState("Dallas");
+
+  // const saveTemperature = () => {
+  //   const temperature = kelvToFarenheit(apiValue.main.temp);
+  //   axios.post("http://localhost:3001/api/temperature", { temperature: temperature })
+  //     .then(response => console.log(response))
+  //     .catch(error => console.error(error));
+  // };
+
+  let saveTemperature = async () => {
+    // await console.log(url)
+    // await console.log(name)
+    const temperature = kelvToFarenheit(apiValue.main.temp);
+    let res = await axios.post("http://localhost:3001/api/temperature", {
+      temp: temperature
+    });
+
+  }
+  
 
   // API URL
 
@@ -121,6 +141,9 @@ function App() {
       <button onClick={hitServer}>
           Post to Server
         </button>
+
+        <button onClick={saveTemperature}>Save temperature to database</button>
+
       <footer className="footer">TODO</footer>
     </div>
   );
