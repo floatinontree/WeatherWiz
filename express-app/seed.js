@@ -55,7 +55,10 @@ const createTable = async (tableName) => {
     const query = `
       CREATE TABLE ${tableName} (
         id SERIAL PRIMARY KEY,
-        temp INT NOT NULL
+        ageGroupOne TEXT NOT NULL DEFAULT 'Res-A',
+        ageGroupTwo TEXT NOT NULL DEFAULT 'Res-B',
+        ageGroupThree TEXT NOT NULL DEFAULT 'Res-C',
+        ageGroupFour TEXT NOT NULL DEFAULT 'Res-D'
       );
     `;
     await dBclient.query(query);
@@ -65,6 +68,20 @@ const createTable = async (tableName) => {
   }
 };
 
+const insertData = async (tableName) => {
+  try {
+    const query = `
+      INSERT INTO ${tableName} (id) 
+      VALUES (DEFAULT)
+    `;
+    await dBclient.query(query);
+    console.log(`Data inserted into ${tableName}`);
+  } catch (error) {
+    console.error(`Error inserting data into ${tableName}`, error);
+  }
+};
+
+
 const reconnect = async() =>{
   
   await client.end()
@@ -73,12 +90,13 @@ const reconnect = async() =>{
 }
 
 
-  client.connect()
+client.connect()
   .then(() => deleteDatabase(dbName))
   .then(() => createDatabase(dbName))
   .then(()=> reconnect())
   .then(() => deleteTable(tableName))
   .then(() => createTable(tableName))
+  .then(() => insertData(tableName))
   .then(() => dBclient.end())
   .catch(error => {
     console.error(error);
