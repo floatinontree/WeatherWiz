@@ -53,7 +53,7 @@ function App() {
   };
 
 
-
+console.log(apiValue)
 
 
   return (
@@ -131,8 +131,24 @@ function App() {
 
         {/* Josh Work TODO *******************************************************************/}
           <div>
-            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) > 45 ? <div><img src={picHot0} /> <img src={picHot1} /><img src={picHot2} /> </div> : null}
-            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) < 45 ? <div><img src={picCold0} /> <img src={picCold1} /><img src={picCold2} /></div> : null}
+            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) > 45 ? 
+            <div><img src={picHot0} /> <img src={picHot1} /><img src={picHot2} /> </div> 
+            : null}
+
+            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) < 45 ? 
+            <div><img src={picCold0} /> <img src={picCold1} /><img src={picCold2} /></div> 
+            : null}
+
+          {value === "Res-B" && kelvToFarenheit(apiValue.main.temp) > 45 ? 
+            <div><img src={picHot0} /> <img src={picHot1} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p></div> 
+            : null}
+
+          {value === "Res-B" && kelvToFarenheit(apiValue.main.temp) < 45 ? 
+            <div><img src={picCold0} /> <img src={picCold1} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p></div> 
+            : null}
+
+
+
           </div>
       {/* Josh Work TODO ***********************************************************************/}
         <h1>-----------------------</h1>
