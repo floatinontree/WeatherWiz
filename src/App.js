@@ -3,6 +3,12 @@ import "./App.css";
 import countries from "i18n-iso-countries";
 import apiKey from "./s";
 import axios from "axios";
+import picHot0 from "./assets/ResA.png"
+import picHot1 from "./assets/ResA3.png"
+import picHot2 from "./assets/ResA4.png"
+import picCold0 from "./assets/ResA2.png"
+import picCold1 from "./assets/ResA5.png"
+import picCold2 from "./assets/ResA6.png"
 
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
@@ -17,15 +23,16 @@ function App() {
     try {
       let response = await axios.get(`http://localhost:3001/api/ageGroup/${ageGroup}`);
       let value = Object.values(response.data)[0];
-      console.log(value);
       setValue(value)
     } catch (error) {
-      console.log("hit");
       console.error(error);
     }
   };
 
-
+  let parser = () => {
+    const weather = apiValue.weather[0].main;
+    console.log('parser', value, weather)
+  }
 
   useEffect(() => {
     fetch(apiUrl)
@@ -42,7 +49,12 @@ function App() {
 
   const handleSubmit = () => {
     setState(getState);
+    parser()
   };
+
+
+
+
 
   return (
     <div className="App">
@@ -116,15 +128,18 @@ function App() {
         </div>
 
         <div className="card mt-3 mx-auto" style={{ width: "60vw" }}>
-        
+
+        {/* Josh Work TODO *******************************************************************/}
+          <div>
+            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) > 45 ? <div><img src={picHot0} /> <img src={picHot1} /><img src={picHot2} /> </div> : null}
+            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) < 45 ? <div><img src={picCold0} /> <img src={picCold1} /><img src={picCold2} /></div> : null}
+          </div>
+      {/* Josh Work TODO ***********************************************************************/}
+        <h1>-----------------------</h1>
           {apiValue.main ? (
             <div className="card-body text-center">
               <h1 className="mt-3" >{value}</h1>
-              <img
-                src={`http://openweathermap.org/img/w/${apiValue.weather[0].icon}.png`}
-                alt="weather status icon"
-                className="weather-icon"
-              />
+
 
               <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p>
 
@@ -170,3 +185,10 @@ function App() {
 }
 
 export default App;
+
+
+           {/* <img
+                src={`http://openweathermap.org/img/w/${apiValue.weather[0].icon}.png`}
+                alt="weather status icon"
+                className="weather-icon"
+              /> */}
