@@ -32,11 +32,6 @@ function App() {
     }
   };
 
-  // let parser = () => {
-  //   const weather = apiValue.weather[0].main;
-  //   console.log('parser', value, weather)
-  // }
-
   useEffect(() => {
     if (state && getState) {
       fetch(apiUrl)
@@ -59,6 +54,24 @@ function App() {
     setState(getState);
     // parser()
   };
+
+
+  const cloudyWeather = `Cloudy weather is when the sky is covered with clouds, which are made up of tiny water droplets or ice crystals. 
+  Clouds form when warm air rises and cools, causing the water vapor in the air to condense into tiny droplets or ice crystals. 
+  The amount and type of clouds can help us predict the weather. For example, white, puffy clouds usually mean fair weather, while dark, flat clouds can indicate a storm is coming. 
+  Different heights and thicknesses of clouds can also give us information about the weather. Low clouds, like stratus clouds, often bring drizzle or light rain. Middle clouds, like altocumulus clouds, 
+  can indicate a change in weather, like a storm coming or going. High clouds, like cirrus clouds, are often a sign of fair weather. In general, cloudy weather can mean that it is cooler and there is less sunshine, 
+  so it\'s a good idea to dress in layers to stay warm and comfortable.`;
+
+
+  const rainyWeather = `How does rain form?
+  Rain forms through a process called the water cycle. This involves the evaporation of water from the surface of the earth into the atmosphere, 
+  the formation of clouds, and the eventual release of water back to the ground in the form of precipitation. Rain can be triggered by many different factors, 
+  including changes in temperature, air pressure, and wind patterns.
+  Why is rain important?
+  Rain is essential for life on Earth. It provides water for plants to grow, which in turn provides food for animals and humans. 
+  It also helps to replenish our rivers, lakes, and groundwater, which are all important sources of drinking water. 
+  In addition, rain plays a critical role in regulating the Earth's climate and weather patterns.`;
 
 
   // console.log(apiValue)
@@ -138,118 +151,133 @@ function App() {
           </button>
         </div>
         {apiValue.main && apiValue.main.temp ? (
-        <div className="card mt-3 mx-auto" style={{ width: "60vw" }}>
+          <div className="card mt-3 mx-auto" style={{ width: "60vw" }}>
 
-          {/* Josh Work TODO *******************************************************************/}
-          <div>
-            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) > 45 ?
-              <div><img src={picHot0} /> <img src={picHot1} /><img src={picHot2} /> </div>
-              : null}
+            {/* DATA TEXT  *******************************************************************/}
+            <div>
+              {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) > 45 ?
+                <div><img src={picHot0} /> <img src={picHot1} /><img src={picHot2} /> </div>
+                : null}
 
-            {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) < 45 ?
-              <div><img src={picCold0} /> <img src={picCold1} /><img src={picCold2} /></div>
-              : null}
+              {value === "Res-A" && kelvToFarenheit(apiValue.main.temp) < 45 ?
+                <div><img src={picCold0} /> <img src={picCold1} /><img src={picCold2} /></div>
+                : null}
 
-            {value === "Res-B" && kelvToFarenheit(apiValue.main.temp) > 45 ?
-              <div>
-                <img src={picHot0} />
-                <img src={picHot1} />
-                <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p>
-                <p><strong>Sky: </strong></p>
-                {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
-                {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
-                {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
-                {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
-              </div>
-              : null}
+              {value === "Res-B" && kelvToFarenheit(apiValue.main.temp) > 45 ?
+                <div>
+                  <img src={picHot0} />
+                  <img src={picHot1} />
+                  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p>
+                  <p><strong>Sky: </strong></p>
+                  {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
+                  {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
+                  {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
+                  {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
+                </div>
+                : null}
 
-            {value === "Res-B" && kelvToFarenheit(apiValue.main.temp) < 45 ?
-              <div><img src={picCold0} /> <img src={picCold1} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p><strong>Sky:</strong></p>
-                {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
-                {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
-                {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
-                {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
+              {value === "Res-B" && kelvToFarenheit(apiValue.main.temp) < 45 ?
+                <div><img src={picCold0} /> <img src={picCold1} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p><strong>Sky:</strong></p>
+                  {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
+                  {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
+                  {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
+                  {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
 
-              </div>
-              : null}
+                </div>
+                : null}
 
-            {value === "Res-C" && kelvToFarenheit(apiValue.main.temp) > 45 ?
-              <div><img src={picHot0} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p><strong>Sky: {apiValue.weather[0].main}</strong></p>
-                {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
-                {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
-                {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
-                {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}</div>
-              : null}
+              {value === "Res-C" && kelvToFarenheit(apiValue.main.temp) > 45 ?
+                <div><img src={picHot0} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p><strong>Sky: {apiValue.weather[0].main}</strong></p>
+                  {apiValue.weather[0].main === "Clouds" && <p>When the sky is cloudy, it's so full of clouds that you can't see the sun<br /><img src={picCloud0} /></p>}
+                  {apiValue.weather[0].main === "Rain" && <p>Rain is precipitation that falls from the sky when water droplets in the atmosphere become too heavy.
+                    <br /> <img src={picRain0} /></p>}
+                  {apiValue.weather[0].main === "Clear" && <p>A sunny day is a day when the sun is shining and the sky is clear. It's a day when the sun's rays can be felt on your skin, and shadows are visible on the ground.
+                    <br /> <img src={picClear0} /></p>}
+                  {apiValue.weather[0].main === "Snow" && <p>Snow is a type of precipitation that occurs when water vapor in the air freezes into ice crystals before falling to the ground.<br /><img src={picSnow0} /></p>}</div>
+                : null}
 
-            {value === "Res-C" && kelvToFarenheit(apiValue.main.temp) < 45 ?
-              <div><img src={picCold0} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p><strong>Sky: {apiValue.weather[0].main}</strong></p>
-                {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
-                {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
-                {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
-                {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
-              </div>
-              : null}
+              {value === "Res-C" && kelvToFarenheit(apiValue.main.temp) < 45 ?
+                <div><img src={picCold0} />  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p><strong>Sky: {apiValue.weather[0].main}</strong></p>
+                  {apiValue.weather[0].main === "Clouds" && <p>When the sky is cloudy, it's so full of clouds that you can't see the sun<br /><img src={picCloud0} /></p>}
+                  {apiValue.weather[0].main === "Rain" && <p>Rain is precipitation that falls from the sky when water droplets in the atmosphere become too heavy.<br /><img src={picRain0} /></p>}
+                  {apiValue.weather[0].main === "Clear" && <p>A sunny day is a day when the sun is shining and the sky is clear. It's a day when the sun's rays can be felt on your skin, and shadows are visible on the ground.<br /><img src={picClear0} /></p>}
+                  {apiValue.weather[0].main === "Snow" && <p>Snow is a type of precipitation that occurs when water vapor in the air freezes into ice crystals before falling to the ground<br /><img src={picSnow0} /></p>}
+                </div>
+                : null}
 
-            {value === "Res-D" && kelvToFarenheit(apiValue.main.temp) > 45 ?
-              <div><p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p className="h2">Feels Like {kelvToFarenheit(apiValue.main.feels_like)}° F</p><p>Atmosphere: {apiValue.weather[0].main}</p>
-               {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
-                {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
-                {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
-                {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
-              
-              <p>Cloudy weather is when the sky is covered with clouds, which are made up of tiny water droplets or ice crystals. Clouds form when warm air rises and cools, causing the water vapor in the air to condense into tiny droplets or ice crystals.
+              {value === "Res-D" && kelvToFarenheit(apiValue.main.temp) > 45 ?
+                <div><p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p className="h2">Feels Like {kelvToFarenheit(apiValue.main.feels_like)}° F</p><p>Atmosphere: {apiValue.weather[0].main}</p>
 
-                The amount and type of clouds can help us predict the weather. For example, white, puffy clouds usually mean fair weather, while dark, flat clouds can indicate a storm is coming.
+                  {/* CLOUDS */}
 
-                Different heights and thicknesses of clouds can also give us information about the weather. Low clouds, like stratus clouds, often bring drizzle or light rain. Middle clouds, like altocumulus clouds, can indicate a change in weather, like a storm coming or going. High clouds, like cirrus clouds, are often a sign of fair weather.
+                  {apiValue.weather[0].main === "Clouds" && <p>{cloudyWeather}<br /><img src={picCloud0} /></p>}
 
-                In general, cloudy weather can mean that it is cooler and there is less sunshine, so it's a good idea to dress in layers to stay warm and comfortable.</p></div>
-              : null}
+                  {/* RAIN */}
 
-            {value === "Res-D" && kelvToFarenheit(apiValue.main.temp) < 45 ?
-              <div>  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p className="h2">Feels Like {kelvToFarenheit(apiValue.main.feels_like)}° F</p><p>Atmosphere: {apiValue.weather[0].main}</p>
-              
-               {apiValue.weather[0].main === "Clouds" && <h2><img src={picCloud0} /></h2>}
-                {apiValue.weather[0].main === "Rain" && <h2><img src={picRain0} /></h2>}
-                {apiValue.weather[0].main === "Clear" && <h2><img src={picClear0} /></h2>}
-                {apiValue.weather[0].main === "Snow" && <h2><img src={picSnow0} /></h2>}
-              
-              
-              <p>Cloudy weather is when the sky is covered with clouds, which are made up of tiny water droplets or ice crystals. Clouds form when warm air rises and cools, causing the water vapor in the air to condense into tiny droplets or ice crystals.
+                  {apiValue.weather[0].main === "Rain" && <p>{rainyWeather}<br /> <img src={picRain0} /></p>}
 
-                The amount and type of clouds can help us predict the weather. For example, white, puffy clouds usually mean fair weather, while dark, flat clouds can indicate a storm is coming.
+                  {/* CLEAR */}
 
-                Different heights and thicknesses of clouds can also give us information about the weather. Low clouds, like stratus clouds, often bring drizzle or light rain. Middle clouds, like altocumulus clouds, can indicate a change in weather, like a storm coming or going. High clouds, like cirrus clouds, are often a sign of fair weather.
+                  {apiValue.weather[0].main === "Clear" && <p>On a sunny day, there are many fun things to do. You could go to the beach, have a picnic in the park, play outdoor sports or games, take a hike, go for a bike ride, or just relax outside in the sun.
+                    What are some dangers of being in the sun?
+                    While it's important to get outside and enjoy the sun, it's also important to protect your skin from the harmful effects of UV rays.
+                    <br /><img src={picClear0} /></p>}
 
-                In general, cloudy weather can mean that it is cooler and there is less sunshine, so it's a good idea to dress in layers to stay warm and comfortable.</p></div>
-              : null}
+                </div>
+                : null}
 
-          </div>
-          {/* Josh Work TODO ***********************************************************************/}
-          {apiValue.main && state ? (
-            <div className="card-body text-center">
+              {value === "Res-D" && kelvToFarenheit(apiValue.main.temp) < 45 ?
+                <div>  <p className="h2">{kelvToFarenheit(apiValue.main.temp)}° F</p><p className="h2">Feels Like {kelvToFarenheit(apiValue.main.feels_like)}° F</p><p>Atmosphere: {apiValue.weather[0].main}</p>
+
+                  {/* CLOUDS */}
+
+                  {apiValue.weather[0].main === "Clouds" && <p>{cloudyWeather}<br /><img src={picCloud0} /></p>}
 
 
+                  {/* RAIN */}
+
+                  {apiValue.weather[0].main === "Rain" && <p>{rainyWeather}<br /> <img src={picRain0} /></p>}
 
 
-              <p className="h5">
-                <i className="fas fa-map-marker-alt"></i>{" "}
-                <strong>{apiValue.name},</strong>{" "}
-                {countries.getName(apiValue.sys.country, "en", {
-                  select: "official",
-                })}
-              </p>
+                  {/* CLEAR */}
+                  {apiValue.weather[0].main === "Clear" && <p>On a sunny day, there are many fun things to do. You could go to the beach, have a picnic in the park, play outdoor sports or games, take a hike, go for a bike ride, or just relax outside in the sun.
 
+                    What are some dangers of being in the sun?
+                    While it's important to get outside and enjoy the sun, it's also important to protect your skin from the harmful effects of UV rays.
+                    <br /> <img src={picClear0} /></p>}
+
+
+                  {/* SNOW */}
+                  {apiValue.weather[0].main === "Snow" && <p>Snow is important for many reasons. It provides water for plants and animals, helps to replenish our water supply, and can even help to prevent droughts in some areas. Snow also provides fun opportunities for winter sports and activities like skiing, snowboarding, and building snowmen.
+
+                    What are the different types of snow?
+                    There are many different types of snow, including light snow, heavy snow, powder snow, and wet snow. Each type of snow is caused by different weather conditions and can have different effects on the environment.
+                    <br /> <img src={picSnow0} /></p>}
+                </div>
+                : null}
             </div>
-          ) : (
-            <h1>Please Enter A Valid City</h1>
-          )}
-        </div>
+            {/* DATA TEXT ***********************************************************************/}
+            {apiValue.main && state ? (
+              <div className="card-body text-center">
+
+                <p className="h5">
+                  <i className="fas fa-map-marker-alt"></i>{" "}
+                  <strong>{apiValue.name},</strong>{" "}
+                  {countries.getName(apiValue.sys.country, "en", {
+                    select: "official",
+                  })}
+                </p>
+
+              </div>
+            ) : (
+              <h1>Please Enter A Valid City</h1>
+            )}
+          </div>
         ) : <h1 className="card-body text-center mt-4">Please Enter A Valid City</h1>}
       </div>
-      
+
     </div>
-    
+
   );
 }
 
