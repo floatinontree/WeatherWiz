@@ -13,6 +13,11 @@ import picCloud0 from "./assets/ResA7.png"
 import picRain0 from "./assets/ResA8.png"
 import picClear0 from "./assets/ResA9.png"
 import picSnow0 from "./assets/ResB.png"
+import { getTime } from "./assets/getTime";
+import { lightStyles } from "./light";
+import { darkStyles } from "./dark";
+
+
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 function App() {
@@ -20,6 +25,10 @@ function App() {
   const [getState, setGetState] = useState("Dallas");
   const [state, setState] = useState("Dallas");
   const [value, setValue] = useState();
+  const [loc, setLoc] = useState();
+  const [time, setTime] = useState();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
 
   let getResponse = async (ageGroup) => {
@@ -32,6 +41,21 @@ function App() {
     }
   };
 
+
+  const getLatAndLong = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log("Latitude: " + latitude + "| Longitude: " + longitude);
+        setLoc("Your Latitude: " + latitude.toFixed(2) + " | Your Longitude: " + longitude.toFixed(2))
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+
+  }
+
   useEffect(() => {
     if (state && getState) {
       fetch(apiUrl)
@@ -40,6 +64,8 @@ function App() {
           .then((res) => res.json())
           .then((data) => setApiValue(data));
     }
+    getLatAndLong()
+    setTime(getTime())
 
   }, [state, apiUrl]);
 
@@ -52,8 +78,12 @@ function App() {
 
   const handleSubmit = () => {
     setState(getState);
-    // parser()
+  
   };
+
+
+
+
 
 
   const cloudyWeather = `Cloudy weather is when the sky is covered with clouds, which are made up of tiny water droplets or ice crystals. 
@@ -78,13 +108,24 @@ function App() {
 
 
   return (
-    <div className="App">
-
-
+    <div className="App" style={isDarkMode ? darkStyles : lightStyles}>
       <header className="d-flex justify-content-center align-items-center">
         <h2>Weather Wiz</h2>
       </header>
+<div class='tc'>
+  <p>Light / Dark</p>
+<div class="toggle">
+        <input type="checkbox" id="switch" name="theme" onClick={() => setIsDarkMode(!isDarkMode)}/>
+        <label for="switch"></label>
+      </div>
+
+      <br />
+</div>
+
+
+      <h5>Today: {time}</h5>
       <div className="d-flex justify-content-center">
+
         <form className="form-group border p-3 rounded">
           <legend className="text-center font-weight-bold">Choose your age group:</legend>
           <div className="form-check">
@@ -149,6 +190,7 @@ function App() {
           <button className="btn btn-primary mt-2" onClick={handleSubmit}>
             Search
           </button>
+
         </div>
         {apiValue.main && apiValue.main.temp ? (
           <div className="card mt-3 mx-auto" style={{ width: "60vw" }}>
@@ -275,7 +317,7 @@ function App() {
           </div>
         ) : <h1 className="card-body text-center mt-4">Please Enter A Valid City</h1>}
       </div>
-
+      <h5>{loc}</h5>
     </div>
 
   );
