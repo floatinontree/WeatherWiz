@@ -8,6 +8,13 @@ Another great feature is the ability to add warnings, so you can look out for ex
 
 Accessible as a website, WeatherWiz is designed to be easy for families to use and understand. Whether you're a busy parent or a young child, WeatherWiz is the perfect tool for staying informed about the weather conditions in the places you care about. Try it now, and see for yourself how WeatherWiz can make your life easier!
 
+## Features
+- User-friendly interface
+- Real-time weather conditions
+- Customizable responses based on age
+- Ability to add warnings for extreme weather conditions
+- Convenient access to weather information for multiple locations
+
 ## Installation
 
 Use the package manager npm
@@ -21,11 +28,28 @@ The 'start' script will run react-scripts start
 ```bash
 npm start
 ```
-## Start Express App
-The 'start' script will run react-scripts start 
+## Running the Express App
+WeatherWiz also includes an Express app that can be used to retrieve weather data. To start the Express app, navigate to the express-app directory and use the following commands:
 
 ```bash
 cd express-app
 npm install
 npm start
 ```
+
+## Non-Functional Requirements
+## Performance
+- The application should respond to user input within 2 seconds.
+- The application should be able to handle a large number of users simultaneously without significant performance degradation.
+## Reliability
+- The application should have an uptime of at least 99%.
+- The application should be able to recover from failures within 1 minute.
+## Scalability
+- The application should be able to handle an increasing number of users without significant performance degradation.
+- The application should be able to scale horizontally by adding more servers.
+## Compatibility
+- The application should work on modern web browsers such as Chrome, Firefox, Safari, and Edge.
+- The application should be compatible with common operating systems such as Windows, macOS, and Linux.
+## Usability
+- The application should be easy to use and understand for users of all ages.
+- The application should be accessible with alt text for screen readers.

@@ -16,6 +16,7 @@ import picSnow0 from "./assets/ResB.png"
 import { getTime } from "./assets/getTime";
 import { lightStyles } from "./light";
 import { darkStyles } from "./dark";
+import logo from "./assets/logo.ico"
 
 
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
@@ -78,7 +79,7 @@ function App() {
 
   const handleSubmit = () => {
     setState(getState);
-  
+
   };
 
 
@@ -110,17 +111,18 @@ function App() {
   return (
     <div className="App" style={isDarkMode ? darkStyles : lightStyles}>
       <header className="d-flex justify-content-center align-items-center">
+      <img src={logo} alt="Weather Wiz Logo"  className="logo"/>
         <h2>Weather Wiz</h2>
       </header>
-<div class='tc'>
-  <p>Light / Dark</p>
-<div class="toggle">
-        <input type="checkbox" id="switch" name="theme" onClick={() => setIsDarkMode(!isDarkMode)}/>
-        <label for="switch"></label>
-      </div>
+      <div class='tc'>
+        <p>Light / Dark</p>
+        <div class="toggle">
+          <input type="checkbox" id="switch" name="theme" onClick={() => setIsDarkMode(!isDarkMode)} />
+          <label for="switch"></label>
+        </div>
 
-      <br />
-</div>
+        <br />
+      </div>
 
 
       <h5>Today: {time}</h5>
@@ -309,7 +311,6 @@ function App() {
                     select: "official",
                   })}
                 </p>
-
               </div>
             ) : (
               <h1>Please Enter A Valid City</h1>
